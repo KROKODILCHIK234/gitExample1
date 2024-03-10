@@ -1,8 +1,5 @@
-from Src.Logics.convertor import convertor
-from datetime import datetime
+class DateTimeConvertor(convertor):
 
-class datetime_convertor(convertor):
-    
     def convert(self, field: str, obj):
         super().convert(field, obj)
         
@@ -15,4 +12,3 @@ class datetime_convertor(convertor):
             return {field: formatted_datetime}
         except Exception as ex:
             self.set_error(ex)
-
