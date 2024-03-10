@@ -17,9 +17,11 @@ def get_report(storage_key: str):
 
     if response_format == 'csv':
         
-        csv_data = csv.DictWriter(open("report.csv", 'w'), fieldnames=report_data.keys())
-        csv_data.writeheader()
-        csv_data.writerow(report_data)
+        with open("report.csv", 'w', newline='') as csvfile:
+            csv_data = csv.DictWriter(csvfile, fieldnames=report_data.keys())
+            csv_data.writeheader()
+            csv_data.writerow(report_data)
+        
         return Response(open("report.csv", 'r'), mimetype="text/csv")
 
     elif response_format == 'markdown':
