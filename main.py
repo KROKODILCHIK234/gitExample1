@@ -1,37 +1,38 @@
-from flask import Flask, request, Response
-import csv
-import json
-import markdown2
-
+from flask import Flask
+from Src.Storage.storage import storage
+import os
+from Src.Logics.data_factory import data_factory
 app = Flask(__name__)
 
-@app.route("/api/report/<storage_key>", methods=["GET"])
-def get_report(storage_key: str):
-    response_format = request.args.get('format', default='json')
+@app.route("/api/report/<storage_key>/<format>", methods=["GET"])
+def get_report(storage_key: str, format: str):
+    s = storage()
+    if storage_key not in s.get_all_keys():
+        response_type = app.response_class(
+            response=f"Такого ключа не существует",
+            status=500,
+            mimetype="application/text"
+        )
 
-    
-    report_data = {
-        "storage_key": storage_key,
-        "some_data": "some_value"
-    }
+        return response_type
 
-    if response_format == 'csv':
-        
-        with open("report.csv", 'w', newline='') as csvfile:
-            csv_data = csv.DictWriter(csvfile, fieldnames=report_data.keys())
-            csv_data.writeheader()
-            csv_data.writerow(report_data)
-        
-        return Response(open("report.csv", 'r'), mimetype="text/csv")
+    if format not in [x.split(".")[0][5:] for x in os.listdir("logic/formats")]:
+        response_type = app.response_class(
+            response=f"Ключ существует, но этот формат экспорта недоступен",
+            status=500,
+            mimetype="application/text"
+        )
+        return response_type
 
-    elif response_format == 'markdown':
-       
-        markdown_content = f"# Report\n\n- Storage Key: {report_data['storage_key']}\n- Some Data: {report_data['some_data']}"
-        return Response(markdown2.markdown(markdown_content), mimetype="text/markdown")
 
-    else:
-        
-        return json.dumps(report_data), 200, {'Content-Type': 'application/json'}
+    response_type = app.response_class(
+        response=f"{data_factory.create(data_factory(), format, 'Сюда нужно передать данные')}",
+        status=200,
+        mimetype="application/text"
+    )
+
+    return response_type
+
 
 if __name__ == "__main__":
     app.run(debug=True)
