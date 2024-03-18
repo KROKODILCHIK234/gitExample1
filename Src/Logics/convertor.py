@@ -1,20 +1,26 @@
 import abc
-from Src.errors import ErrorProxy
-from Src.exceptions import ExceptionProxy
+from Src.errors import error_proxy
+from Src.exceptions import exception_proxy
 
-class Convertor(ErrorProxy):
+# 
+# Абстрактный класс для конвертации данных в json
+#
+class convertor(error_proxy):
     
     @abc.abstractmethod
-    def convert(self, field: str, obj) -> dict:
+    def serialize(self, field: str, object) -> dict:
         """
-        Convert the object to a dictionary.
-        
+            Сконвертировать объект в словарь
         Args:
-            field (str): The field name.
-            obj (_type_): Any type of data.
-        
-        Returns:
-            dict: The converted dictionary.
+            source (_type_): Любой тип данных
         """
-        ExceptionProxy.validate(field, str)
+        exception_proxy.validate(field, str)
         self.clear()
+
+
+    @abc.abstractmethod
+    def deserialize(self, dictionary) -> dict:
+        exception_proxy.validate(dictionary, dict)
+        self.clear()
+         
+        
