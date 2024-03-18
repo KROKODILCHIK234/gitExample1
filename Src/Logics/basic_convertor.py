@@ -1,16 +1,27 @@
-from Src.Logics.convertor import Convertor
+from Src.Logics.convertor import convertor
 
-class BasicConvertor(Convertor):
+#
+# Конвертор простых значений в словарь
+#
+class basic_convertor(convertor):
    
-    def convert(self, field: str, obj) -> dict:
-        super().convert(field, obj)
+   def serialize(self, field: str, object) -> dict:
+      """
+            Подготовить словарь 
+        Args:
+            field (str): поле
+            object (_type_): значение
+      """
+      super().serialize( field, object)
       
-        if not isinstance(obj, (int, str, bool)):
-            self._error.error = f"Некорректный тип данных передан для конвертации. Ожидается: (int, str, bool). Передан: {type(obj)}"
-            return None
+      if not isinstance(object, (int, str, bool)):
+          self.error = f"Некорректный тип данных передан для конвертации. Ожидается: (int, str, bool). Передан: {type(object)}"
+          return None
       
-        try:
-            return {field: obj}
-        except Exception as ex:
-            self._error.set_error(ex)
-            return None
+      try:
+            return { field: object }
+      except Exception as ex:
+            self.set_error(ex)  
+            
+      return None        
+        
