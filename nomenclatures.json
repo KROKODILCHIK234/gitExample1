@@ -1,0 +1,114 @@
+{
+        "description": "",
+        "group": {
+            "description": "",
+            "id": "c917fcd3b3664ef4979e00e9db8c2873",
+            "is_error": false,
+            "name": "Ингредиенты"
+        },
+        "id": "c6c1f137837942e0ad87d95b982413e1",
+        "is_error": false,
+        "name": "Мука пшеничная",
+        "unit": {
+            "base_unit": {
+                "base_unit": null,
+                "coefficient": 1,
+                "description": "",
+                "id": "e47695b37b8248ba92cf1a0be59466b4",
+                "is_error": false,
+                "name": "грамм"
+            },
+            "coefficient": 1000,
+            "description": "",
+            "id": "c412a5eb1d0d40c89b1ce9705caf3edb",
+            "is_error": false,
+            "name": "килограмм"
+        }
+    },
+    {
+        "description": "",
+        "group": {
+            "description": "",
+            "id": "c917fcd3b3664ef4979e00e9db8c2873",
+            "is_error": false,
+            "name": "Ингредиенты"
+        },
+        "id": "7b572e394f744701a427ff042590db95",
+        "is_error": false,
+        "name": "Сахар",
+        "unit": {
+            "base_unit": {
+                "base_unit": null,
+                "coefficient": 1,
+                "description": "",
+                "id": "e47695b37b8248ba92cf1a0be59466b4",
+                "is_error": false,
+                "name": "грамм"
+            },
+            "coefficient": 1000,
+            "description": "",
+            "id": "c412a5eb1d0d40c89b1ce9705caf3edb",
+            "is_error": false,
+            "name": "килограмм"
+        }
+    },
+    {
+        "description": "",
+        "group": {
+            "description": "",
+            "id": "c917fcd3b3664ef4979e00e9db8c2873",
+            "is_error": false,
+            "name": "Ингредиенты"
+        },
+        "id": "12dce04643ee404b892a3c492e5fa997",
+        "is_error": false,
+        "name": "Сливочное масло",
+        "unit": {
+            "base_unit": {
+                "base_unit": null,
+                "coefficient": 1,
+                "description": "",
+                "id": "e47695b37b8248ba92cf1a0be59466b4",
+                "is_error": false,
+                "name": "грамм"
+            },
+            "coefficient": 1000,
+            "description": "",
+            "id": "c412a5eb1d0d40c89b1ce9705caf3edb",
+            "is_error": false,
+            "name": "килограмм"
+        }
+    },
+    {
+        "description": "",
+        "group": {
+            "description": "",
+            "id": "c917fcd3b3664ef4979e00e9db8c2873",
+            "is_error": false,
+            "name": "Ингредиенты"
+        },
+        "id": "1767984b93b54630bcd276bfbcb19eda",
+        "is_error": false,
+        "name": "Яйца",
+        "unit": {
+            "base_unit": null,
+            "coefficient": 1,
+            "description": "",
+            "id": "dc27e84117b24b56a6971f370e9361d4",
+            "is_error": false,
+            "name": "штука"
+        }
+    },
+    {
+        "description": "",
+        "group": {
+            "description": "",
+            "id": "c917fcd3b3664ef4979e00e9db8c2873",
+            "is_error": false,
+            "name": "Ингредиенты"
+        },
+        "id": "78d93d0e9946437db9705b2d2e4ed734",
+        "is_error": false,
+        ...
+    }
+]
