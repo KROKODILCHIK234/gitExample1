@@ -2,7 +2,6 @@ from Src.exceptions import argument_exception
 from Src.errors import error_proxy
 from datetime import datetime
 
-
 #
 # Прототип для обработки складских транзакций
 #
@@ -15,16 +14,17 @@ class storage_prototype(error_proxy):
         
         self.__data = data
 
-    def filter( self,start_period: datetime, stop_period: datetime  ):
+    def filter(self, start_period: datetime, stop_period: datetime, nomenclature: str = None):
         """
-            Отфильтровать по периоду
+        Фильтрует данные по заданному периоду и номенклатуре.
+        
         Args:
-            data (list): список складских транзакций
-            start_period (datetime): начало
-            stop_period (datetime): окончание
-
+            start_period (datetime): Начало периода
+            stop_period (datetime): Конец периода
+            nomenclature (str, optional): Номенклатура, которую необходимо показать. По умолчанию None.
+        
         Returns:
-            storage_prototype: _description_
+            storage_prototype: Новый экземпляр прототипа с отфильтрованными данными.
         """
         if len(self.__data) <= 0:
             self.error = "Некорректно переданы параметры!"
@@ -32,28 +32,22 @@ class storage_prototype(error_proxy):
         if start_period > stop_period:
             self.error = "Некорректный период!"
             
-         
         if not self.is_empty:
             return self.__data
         
         result = []
         for item in self.__data:
             if item.period > start_period and item.period <= stop_period:
-                result.append(item)
+                if nomenclature is None or item.nomenclature == nomenclature:
+                    result.append(item)
                 
-        return   storage_prototype( result )
+        return storage_prototype(result)
     
     @property
     def data(self):
         """
-            Полученные данные
+        Полученные данные
         Returns:
-            _type_: _description_
+        list: Список данных
         """
-        return self.__data         
-                
-                   
-            
-            
-        
-    
+        return self.__data  
