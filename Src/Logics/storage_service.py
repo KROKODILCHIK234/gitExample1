@@ -14,8 +14,24 @@ class storage_service:
         
         self.__data = data
         
+    # Создание нового метода, использующего прототип
+    def custom_method_using_prototype(self, custom_param: str) -> list:
+        """
+            Демонстрационный метод, использующий прототип
+        Args:
+            custom_param (str): Пользовательский параметр
+
+        Returns:
+            list: Результат обработки
+        """
+        prototype = storage_prototype(self.__data)
         
-    def create_turns(self, start_period: datetime, stop_period:datetime ) -> dict:
+        # Некий дополнительный функционал с использованием прототипа
+        processed_data = prototype.custom_operation(custom_param)
+        
+        return processed_data
+        
+    def create_turns(self, start_period: datetime, stop_period: datetime) -> dict:
         """
             Получить обороты за период
         Args:
@@ -31,35 +47,35 @@ class storage_service:
         if start_period > stop_period:
             raise argument_exception("Некорректно переданы параметры!")
         
-        # Фильтруем      
-        prototype = storage_prototype(  self.__data )  
-        filter = prototype.filter( start_period, stop_period)
+        # Фильтруем
+        prototype = storage_prototype(self.__data)
+        filter = prototype.filter(start_period, stop_period)
             
-        # Подобрать процессинг    
+        # Подобрать процессинг
         key_turn = process_factory.turn_key()
-        processing = process_factory().create( key_turn  )
+        processing = process_factory().create(key_turn)
     
         # Обороты
-        turns =  processing().process( filter.data )
+        turns = processing().process(filter.data)
         return turns
         
     @staticmethod        
-    def create_response( data: list, app):
-        """"
+    def create_response(data: list, app):
+        """
             Сформировать данные для сервера
         """
         if app is None:
             raise argument_exception("Некорректно переданы параметры!")
 
-        # Преоброзование
-        data = convert_factory().serialize( data )
-        json_text = json.dumps( data, sort_keys = True, indent = 4,  ensure_ascii = False)  
+        # Преобразование
+        data = convert_factory().serialize(data)
+        json_text = json.dumps(data, sort_keys=True, indent=4, ensure_ascii=False)
    
         # Подготовить ответ    
         result = app.response_class(
-            response = f"{json_text}",
-            status = 200,
-            mimetype = "application/json; charset=utf-8"
+            response=f"{json_text}",
+            status=200,
+            mimetype="application/json; charset=utf-8"
         )
         
         return result
